@@ -21,7 +21,6 @@ test:
     - OUT=$CIRCLE_ARTIFACTS/public/ bin/rails test
   pre:
     - bin/yarn
-    - npm install -g @angular/cli:@1.7.2
     - npm install:
         pwd:
           ui-app
@@ -30,6 +29,6 @@ test:
           ui-app
 
   post:
-    - ng lint:
+    - npm run lint:
         pwd:
           ui-app
