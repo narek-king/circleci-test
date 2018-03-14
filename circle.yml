@@ -12,17 +12,22 @@ machine:
   environment:
     REDIS_URL: "redis://localhost:6379"
 
+dependencies:
+  pre:
+    - sudo apt-get update; sudo apt-get install graphviz
 
 test:
+  override:
+    - OUT=$CIRCLE_ARTIFACTS/public/ bin/rails test
   pre:
     - bin/yarn
     - sudo npm install -g @angular/cli:@1.7.2
-        - npm install:
-            pwd:
-              ui-app
-        - npm run build:
-            pwd:
-              ui-app
+    - npm install:
+        pwd:
+          ui-app
+    - npm run build:
+        pwd:
+          ui-app
 
   post:
     - ng lint:
