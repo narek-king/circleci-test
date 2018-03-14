@@ -9,17 +9,13 @@ machine:
     version: 2.3.3
   services:
     - redis
-    - mysql
   environment:
     REDIS_URL: "redis://localhost:6379"
-    MYSQL_HOST: localhost
-    MYSQL_USER: root
-    DISABLE_SPRING: true
-    CODECOV_TOKEN: 36afdd79-024e-41c0-be16-f6fa50b207c4
 
 dependencies:
   pre:
     - sudo apt-get update; sudo apt-get install graphviz
+  post:
     - sudo npm install -g @angular/cli:@1.7.2
     - npm install:
         pwd:
@@ -29,8 +25,6 @@ dependencies:
           ui-app
 
 test:
-  override:
-    - OUT=$CIRCLE_ARTIFACTS/public/ bin/rails test
   pre:
     - bin/yarn
 
